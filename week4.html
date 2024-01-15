@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    
+    
+    <!-- <input  type="text" id = "input1" placeholder = "first number"> <br><br>
+    <input   type="text" id = "input2" placeholder = "second number" > <br><br>
+    <button onClick = "sum()">GET THE SUM</button>
+    <p id = "display"></p> -->
+
+
+                   <!-- HARDER ASSIGNMENT -->
+     <input type="text" placeholder = "principal amt"><br><br>
+     <input type="text" placeholder = "interest rate"><br><br>
+     <input type="text" placeholder = "time"><br><br>
+
+     <button onclick = "solve()">CALCULATE</button>
+     <div id = "Display"></div>
+
+
+    <script>
+
+        //function sum(){
+             
+            // let a = parseInt(document.getElementById("input1").value);
+            // let b = parseInt(document.getElementById("input2").value);
+             //fetch("http://localhost:3300/sum?a="+a+"&b="+b);
+             
+             //let res = a+b;
+            // console.log(res);
+             //let para = document.getElementById("display");
+             //para.innerHTML = "The sum is " + res;
+        //}
+
+
+        async function solve(){
+            let ele = document.getElementsByTagName("input");
+            
+            let p = parseInt(ele[0].value);
+            let r = parseInt(ele[1].value);
+            let t = parseInt(ele[2].value);
+            //let interest = (p*r*t)/100;
+            //let total =  p + interest;
+
+            //let para = document.getElementById("Display");
+           // const htmlcontent = `<h5>The total amount is:${total}</h5><h5>The interest paid is:${interest}</h5>`;
+            //para.innerHTML = htmlcontent;
+
+            try{
+                const response = await fetch("http://localhost:3300/interest?p="+p+"&r="+r+"&t="+t);
+                const data = await response.json();
+                console.log(typeof(data));
+                let res = data;
+                document.getElementById("Display").innerHTML = `<h6 style = "margin : 0px;padding:0;">The total amount is:${res.total}</h6>
+                    <h6 style = "margin-top:0px;margin-bottom:0px;">The interest is:${res.interest}</h6>`;
+            }
+            catch (error) {
+                console.error('Error:', error);
+              }
+            
+        }
+    </script>
+
+
+</body>
+</html>
